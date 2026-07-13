@@ -280,6 +280,171 @@ const startApp = () => {
       }
     }, { passive: true });
   }
+
+  /* ── 15. OWAIS ASSISTANT AI CHATBOT LOGIC ── */
+  const trigger = document.getElementById('chatbotTrigger');
+  const panel = document.getElementById('chatbotPanel');
+  const closeBtn = document.getElementById('chatbotCloseBtn');
+  const settingsBtn = document.getElementById('chatbotSettingsBtn');
+  const settingsPanel = document.getElementById('chatbotSettingsPanel');
+  const apiKeyInput = document.getElementById('geminiApiKeyInput');
+  const saveApiKeyBtn = document.getElementById('saveApiKeyBtn');
+  const chatMessages = document.getElementById('chatbotMessages');
+  const chatInput = document.getElementById('chatbotInput');
+  const sendBtn = document.getElementById('chatbotSendBtn');
+
+  let chatHistory = [
+    { sender: 'assistant', text: "Hello! I'm Owais Assistant, the virtual representative for Altrix Agency. How can I help you explore our design services today?" },
+    { sender: 'assistant', text: "Ask me anything about our founders (Thanseer, Owais, Harshad), our services, budget ranges, or works like hptgroupuae.com!" }
+  ];
+
+  let apiKey = localStorage.getItem('gemini_api_key') || '';
+  if (apiKeyInput) apiKeyInput.value = apiKey;
+
+  const renderMessages = () => {
+    if (!chatMessages) return;
+    chatMessages.innerHTML = '';
+    chatHistory.forEach(msg => {
+      const bubble = document.createElement('div');
+      bubble.className = `message-bubble ${msg.sender}`;
+      bubble.textContent = msg.text;
+      chatMessages.appendChild(bubble);
+    });
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  };
+
+  const showTypingIndicator = () => {
+    const indicator = document.createElement('div');
+    indicator.className = 'typing-indicator';
+    indicator.id = 'typingIndicator';
+    indicator.innerHTML = '<span class="typing-dot"></span><span class="typing-dot"></span><span class="typing-dot"></span>';
+    chatMessages.appendChild(indicator);
+    chatMessages.scrollTop = chatMessages.scrollHeight;
+  };
+
+  const removeTypingIndicator = () => {
+    const indicator = document.getElementById('typingIndicator');
+    if (indicator) indicator.remove();
+  };
+
+  // Pre-programmed Knowledge Base Fallback
+  const getLocalResponse = (query) => {
+    const q = query.toLowerCase();
+    
+    if (q.includes('founder') || q.includes('team') || q.includes('thanseer') || q.includes('owais') || q.includes('harshad') || q.includes('coo') || q.includes('cto') || q.includes('cro')) {
+      return "Altrix was founded by three experts:\n• Thanseer (COO): Directs operational execution and pixel compliance.\n• Owais (CTO): Leads architectural mandates, speed, and stack stability.\n• Harshad (CRO): Drives business conversions and high-performance revenue pipelines.";
+    }
+    
+    if (q.includes('work') || q.includes('portfolio') || q.includes('project') || q.includes('hpt') || q.includes('hptgroupuae') || q.includes('nordic') || q.includes('aura')) {
+      return "Some of our highlighted works are:\n1. HPT Group UAE (hptgroupuae.com) — Corporate portal for multi-sector enterprises.\n2. Nordic Store — Minimalist luxury Shopify storefront.\n3. Aura Finance — Fintech design generating 220% growth in leads.";
+    }
+    
+    if (q.includes('price') || q.includes('budget') || q.includes('cost') || q.includes('rate') || q.includes('charge') || q.includes('fee') || q.includes('inr') || q.includes('rupee')) {
+      return "Our current project budget ranges in INR are:\n• Growth: ₹2,000 – ₹5,000\n• Pro: ₹5,000 – ₹10,000\n• Enterprise: ₹20,000+\nWe build premium custom assets tailored to these scopes.";
+    }
+    
+    if (q.includes('contact') || q.includes('email') || q.includes('mail') || q.includes('phone') || q.includes('call') || q.includes('number') || q.includes('918248858180')) {
+      return "You can reach Altrix Agency directly via:\n✉️ Email: team@altrixagency.in\n📞 Phone: +91 8248858180\nOr submit details in the form at the bottom of this page!";
+    }
+
+    if (q.includes('services') || q.includes('design') || q.includes('develop') || q.includes('make') || q.includes('build') || q.includes('website')) {
+      return "Altrix Agency provides high-end:\n• UI/UX Brand Design & Prototypes\n• Interactive Next.js & Web Development\n• Custom E-Commerce Architectures\n• Animations & Visual Identity Overhauls";
+    }
+
+    if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('yo') || q.includes('greetings')) {
+      return "Hello! How can I assist you with Altrix Agency today?";
+    }
+
+    return "Altrix Agency focuses on crafting high-end, smooth digital masterpieces for brands. You can reach out directly to team@altrixagency.in or call +91 8248858180 to speak to our founders Thanseer, Owais, and Harshad!";
+  };
+
+  // Generate reply via Gemini API or fallback
+  const getGeminiResponse = async (userPrompt) => {
+    if (!apiKey) {
+      return getLocalResponse(userPrompt);
+    }
+    
+    try {
+      const url = `https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=${apiKey}`;
+      const response = await fetch(url, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          contents: [{ parts: [{ text: userPrompt }] }],
+          systemInstruction: {
+            parts: [{ text: "You are Owais Assistant, the highly professional, helpful, and creative AI representative of Altrix Agency (founded by Thanseer COO, Owais CTO, Harshad CRO. Email: team@altrixagency.in, Phone: +91 8248858180). Keep answers elegant and brief." }]
+          }
+        })
+      });
+      
+      if (!response.ok) throw new Error("API call failed");
+      const data = await response.json();
+      return data.candidates[0].content.parts[0].text;
+    } catch (e) {
+      console.warn("Gemini API call failed, falling back to local model: ", e);
+      return getLocalResponse(userPrompt) + "\n\n(Note: Custom Gemini API call failed. Using local database fallback)";
+    }
+  };
+
+  const handleSendMessage = async () => {
+    const text = chatInput.value.trim();
+    if (!text) return;
+    
+    chatInput.value = '';
+    chatHistory.push({ sender: 'user', text });
+    renderMessages();
+    
+    showTypingIndicator();
+    
+    // Fetch response
+    const reply = await getGeminiResponse(text);
+    
+    removeTypingIndicator();
+    chatHistory.push({ sender: 'assistant', text: reply });
+    renderMessages();
+  };
+
+  if (trigger && panel) {
+    trigger.addEventListener('click', () => {
+      panel.classList.toggle('open');
+      if (panel.classList.contains('open')) {
+        renderMessages();
+        setTimeout(() => chatInput.focus(), 300);
+      }
+    });
+
+    if (closeBtn) {
+      closeBtn.addEventListener('click', () => panel.classList.remove('open'));
+    }
+
+    if (settingsBtn && settingsPanel) {
+      settingsBtn.addEventListener('click', () => settingsPanel.classList.toggle('open'));
+    }
+
+    if (saveApiKeyBtn && apiKeyInput) {
+      saveApiKeyBtn.addEventListener('click', () => {
+        apiKey = apiKeyInput.value.trim();
+        localStorage.setItem('gemini_api_key', apiKey);
+        if (settingsPanel) settingsPanel.classList.remove('open');
+        
+        chatHistory.push({ 
+          sender: 'assistant', 
+          text: apiKey ? "Gemini API configuration updated! I am now running in fully autonomous generative AI mode." : "API Key cleared. Swapped back to local knowledge base mode." 
+        });
+        renderMessages();
+      });
+    }
+
+    if (chatInput) {
+      chatInput.addEventListener('keydown', e => {
+        if (e.key === 'Enter') handleSendMessage();
+      });
+    }
+
+    if (sendBtn) {
+      sendBtn.addEventListener('click', handleSendMessage);
+    }
+  }
 };
 
 // Foolproof Initialization Sequence (fires regardless of load timing)

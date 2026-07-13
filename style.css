@@ -1232,3 +1232,366 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
   .btn-primary, .btn-secondary { justify-content: center; }
   .section-title { font-size: 1.7rem; }
 }
+
+/* ================================================================
+   OWAIS ASSISTANT AI CHATBOT WIDGET
+   ================================================================ */
+.chatbot-container {
+  position: fixed;
+  bottom: 32px;
+  right: 96px; /* Offset to sit nicely next to the back-to-top button */
+  z-index: 997;
+  font-family: var(--font-body);
+}
+
+.chatbot-trigger {
+  width: 48px;
+  height: 48px;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 20px rgba(13, 13, 12, 0.15);
+  transition: transform var(--transition), box-shadow var(--transition);
+  position: relative;
+  border: 1px solid var(--border);
+  will-change: transform;
+}
+
+.chatbot-trigger:hover {
+  transform: scale(1.08) translate3d(0, -2px, 0);
+  box-shadow: 0 8px 25px rgba(13, 13, 12, 0.25);
+}
+
+.trigger-dot {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 10px;
+  height: 10px;
+  background-color: #10b981; /* Green online dot */
+  border-radius: 50%;
+  border: 2px solid var(--bg-primary);
+  box-shadow: 0 0 0 2px rgba(16, 185, 129, 0.4);
+  animation: pulseGreen 2s infinite alternate;
+}
+
+@keyframes pulseGreen {
+  0% { box-shadow: 0 0 0 0px rgba(16, 185, 129, 0.4); }
+  100% { box-shadow: 0 0 0 6px rgba(16, 185, 129, 0); }
+}
+
+.chatbot-panel {
+  position: absolute;
+  bottom: 64px;
+  right: 0;
+  width: 350px;
+  height: 480px;
+  background-color: #fbf9f4; /* Solid warm canvas */
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--shadow-elevated);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none;
+  transform: scale(0.95) translate3d(0, 20px, 0);
+  transition: opacity 0.4s var(--transition), transform 0.4s var(--transition), pointer-events 0.4s;
+  will-change: transform, opacity;
+}
+
+.chatbot-panel.open {
+  opacity: 1;
+  pointer-events: all;
+  transform: scale(1) translate3d(0, 0, 0);
+}
+
+.chatbot-header {
+  padding: 16px 20px;
+  background: var(--bg-secondary);
+  border-bottom: 1px solid var(--border);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.chatbot-header-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.chatbot-avatar-wrap {
+  position: relative;
+  width: 38px;
+  height: 38px;
+  background: var(--text-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--bg-primary);
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.1rem;
+}
+
+.chatbot-status-dot {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  width: 8px;
+  height: 8px;
+  background-color: #10b981;
+  border-radius: 50%;
+  border: 2px solid var(--bg-secondary);
+}
+
+.chatbot-header-info h4 {
+  font-family: var(--font-display);
+  font-size: 0.95rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.chatbot-status {
+  font-size: 0.6rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.chatbot-header-actions {
+  display: flex;
+  gap: 8px;
+}
+
+.chatbot-header-actions button {
+  color: var(--text-secondary);
+  padding: 4px;
+  border-radius: 50%;
+  transition: color var(--transition), background var(--transition);
+}
+
+.chatbot-header-actions button:hover {
+  color: var(--text-primary);
+  background: rgba(13, 13, 12, 0.05);
+}
+
+/* SETTINGS PANEL OVERLAY */
+.chatbot-settings-panel {
+  position: absolute;
+  top: 71px;
+  left: 0;
+  right: 0;
+  background: #fbf9f4;
+  border-bottom: 1px solid var(--border);
+  padding: 20px;
+  z-index: 10;
+  transform: translateY(-100%);
+  opacity: 0;
+  pointer-events: none;
+  transition: transform 0.4s var(--transition), opacity 0.3s var(--transition);
+}
+
+.chatbot-settings-panel.open {
+  transform: translateY(0);
+  opacity: 1;
+  pointer-events: all;
+}
+
+.chatbot-settings-panel h5 {
+  font-family: var(--font-display);
+  font-size: 0.88rem;
+  font-weight: 800;
+  margin-bottom: 6px;
+}
+
+.chatbot-settings-panel p {
+  font-size: 0.72rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+
+.settings-input-group {
+  display: flex;
+  gap: 8px;
+}
+
+.settings-input-group input {
+  flex-grow: 1;
+  padding: 8px 12px;
+  font-size: 0.8rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-sm);
+  background: #fff;
+  outline: none;
+  color: var(--text-primary);
+}
+
+.settings-input-group button {
+  padding: 8px 14px;
+  font-size: 0.75rem;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: var(--radius-sm);
+  transition: opacity var(--transition);
+}
+
+.settings-input-group button:hover {
+  opacity: 0.9;
+}
+
+.settings-links {
+  margin-top: 8px;
+  text-align: right;
+}
+
+.settings-links a {
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-decoration: underline;
+}
+
+.settings-links a:hover {
+  color: var(--text-primary);
+}
+
+/* MESSAGES CONTAINER */
+.chatbot-messages {
+  flex-grow: 1;
+  padding: 20px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  background-color: rgba(245, 242, 235, 0.25);
+}
+
+.message-bubble {
+  max-width: 80%;
+  padding: 10px 14px;
+  font-size: 0.82rem;
+  line-height: 1.5;
+  border-radius: 14px;
+  word-wrap: break-word;
+  animation: messageReveal 0.3s ease forwards;
+}
+
+@keyframes messageReveal {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.message-bubble.assistant {
+  align-self: flex-start;
+  background-color: var(--bg-card);
+  color: var(--text-primary);
+  border: 1px solid var(--border);
+  border-top-left-radius: 2px;
+}
+
+.message-bubble.user {
+  align-self: flex-end;
+  background-color: var(--text-primary);
+  color: var(--bg-primary);
+  border-top-right-radius: 2px;
+}
+
+/* TYPING INDICATOR */
+.typing-indicator {
+  display: flex;
+  gap: 4px;
+  padding: 10px 14px;
+  align-self: flex-start;
+  background-color: var(--bg-card);
+  border: 1px solid var(--border);
+  border-radius: 14px;
+  border-top-left-radius: 2px;
+  align-items: center;
+}
+
+.typing-dot {
+  width: 6px;
+  height: 6px;
+  background-color: var(--text-muted);
+  border-radius: 50%;
+  animation: typingBounce 1.4s infinite ease-in-out both;
+}
+
+.typing-dot:nth-child(1) { animation-delay: -0.32s; }
+.typing-dot:nth-child(2) { animation-delay: -0.16s; }
+
+@keyframes typingBounce {
+  0%, 80%, 100% { transform: scale(0); }
+  40% { transform: scale(1.0); }
+}
+
+/* INPUT BAR */
+.chatbot-input-bar {
+  padding: 12px 16px;
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border);
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.chatbot-input-bar input {
+  flex-grow: 1;
+  padding: 10px 14px;
+  font-size: 0.85rem;
+  border: 1px solid var(--border);
+  border-radius: 50px;
+  background: #fff;
+  outline: none;
+  color: var(--text-primary);
+  transition: border-color var(--transition);
+}
+
+.chatbot-input-bar input:focus {
+  border-color: var(--text-primary);
+}
+
+.chatbot-input-bar button {
+  width: 36px;
+  height: 36px;
+  background: var(--text-primary);
+  color: var(--bg-primary);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: opacity var(--transition), transform var(--transition);
+}
+
+.chatbot-input-bar button:hover {
+  opacity: 0.9;
+  transform: scale(1.04);
+}
+
+/* Mobile responsive layout for chatbot */
+@media (max-width: 480px) {
+  .chatbot-container {
+    bottom: 16px;
+    right: 16px;
+  }
+  .chatbot-trigger {
+    width: 44px;
+    height: 44px;
+  }
+  .chatbot-panel {
+    width: calc(100vw - 32px);
+    height: 380px;
+    bottom: 56px;
+  }
+  .back-to-top {
+    bottom: 16px;
+    right: 76px; /* Shift back-to-top to sit next to trigger */
+  }
+}
+
