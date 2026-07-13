@@ -327,35 +327,85 @@ const startApp = () => {
     if (indicator) indicator.remove();
   };
 
-  // Pre-programmed Knowledge Base Fallback
+  // Intelligent Token-Matching Knowledge Base Fallback
   const getLocalResponse = (query) => {
-    const q = query.toLowerCase();
+    const q = query.toLowerCase().replace(/[.,\/#!$%\^&\*;:{}=\-_`~()?]/g,"");
+    const queryWords = q.split(/\s+/);
     
-    if (q.includes('founder') || q.includes('team') || q.includes('thanseer') || q.includes('owais') || q.includes('harshad') || q.includes('coo') || q.includes('cto') || q.includes('cro')) {
-      return "Altrix was founded by three experts:\n• Thanseer (COO): Directs operational execution and pixel compliance.\n• Owais (CTO): Leads architectural mandates, speed, and stack stability.\n• Harshad (CRO): Drives business conversions and high-performance revenue pipelines.";
-    }
-    
-    if (q.includes('work') || q.includes('portfolio') || q.includes('project') || q.includes('hpt') || q.includes('hptgroupuae') || q.includes('nordic') || q.includes('aura')) {
-      return "Some of our highlighted works are:\n1. HPT Group UAE (hptgroupuae.com) — Corporate portal for multi-sector enterprises.\n2. Nordic Store — Minimalist luxury Shopify storefront.\n3. Aura Finance — Fintech design generating 220% growth in leads.";
-    }
-    
-    if (q.includes('price') || q.includes('budget') || q.includes('cost') || q.includes('rate') || q.includes('charge') || q.includes('fee') || q.includes('inr') || q.includes('rupee')) {
-      return "Our current project budget ranges in INR are:\n• Growth: ₹2,000 – ₹5,000\n• Pro: ₹5,000 – ₹10,000\n• Enterprise: ₹20,000+\nWe build premium custom assets tailored to these scopes.";
-    }
-    
-    if (q.includes('contact') || q.includes('email') || q.includes('mail') || q.includes('phone') || q.includes('call') || q.includes('number') || q.includes('918248858180')) {
-      return "You can reach Altrix Agency directly via:\n✉️ Email: team@altrixagency.in\n📞 Phone: +91 8248858180\nOr submit details in the form at the bottom of this page!";
+    const qaDatabase = [
+      {
+        keywords: ['founder', 'founders', 'founded', 'started', 'owners', 'owner', 'started', 'created', 'started altrix'],
+        response: "Altrix Agency was founded by Thanseer (COO), Owais (CTO), and Harshad (CRO). They combine design operations, engineering leadership, and business strategy to deliver high-performance websites."
+      },
+      {
+        keywords: ['thanseer', 'coo', 'operations', 'operational', 'deliver'],
+        response: "Thanseer is the Chief Operating Officer (COO) of Altrix. He oversees project delivery, creative asset quality, and layout compliance, ensuring every pixel matches the high-end vision."
+      },
+      {
+        keywords: ['owais', 'cto', 'tech', 'technology', 'developer', 'engineer', 'code', 'coding'],
+        response: "Owais is the Chief Technology Officer (CTO) of Altrix. He leads all technical execution, site performance, interactive layouts, animations, and custom stack engineering."
+      },
+      {
+        keywords: ['harshad', 'cro', 'revenue', 'sales', 'growth', 'business', 'onboard'],
+        response: "Harshad is the Chief Revenue Officer (CRO) of Altrix. He manages revenue strategies, conversion funnels, client onboarding, and marketing pipeline optimization."
+      },
+      {
+        keywords: ['phone', 'mobile', 'call', 'number', 'whatsapp', 'dial', 'telephone', 'phone number', 'mobile number'],
+        response: "Our official call and WhatsApp hotline is +91 8248858180."
+      },
+      {
+        keywords: ['email', 'gmail', 'mail', 'inbox', 'address', 'send email', 'email id', 'contact email'],
+        response: "You can email our team directly at team@altrixagency.in."
+      },
+      {
+        keywords: ['contact', 'reach', 'touch', 'location', 'where', 'office', 'talk', 'chat'],
+        response: "You can reach Altrix Agency via email at team@altrixagency.in, call or WhatsApp at +91 8248858180, or fill out the contact form below."
+      },
+      {
+        keywords: ['price', 'pricing', 'cost', 'budget', 'charge', 'rate', 'fees', 'rupee', 'inr', 'packages'],
+        response: "Our project rates in INR are:\n• Growth: ₹2,000 – ₹5,000\n• Pro: ₹5,000 – ₹10,000\n• Enterprise: ₹20,000+"
+      },
+      {
+        keywords: ['services', 'do you do', 'skills', 'offer', 'offerings', 'web design', 'web development', 'shopify', 'ecommerce'],
+        response: "We offer end-to-end services including UI/UX Brand Design, Next.js & Webflow Development, Custom Animations, and Premium Shopify E-commerce Storefronts."
+      },
+      {
+        keywords: ['work', 'works', 'portfolio', 'websites', 'projects', 'examples', 'done', 'show', 'case study'],
+        response: "Our key works include HPT Group UAE (hptgroupuae.com) for corporate solutions, Nordic Store (minimalist luxury storefront), and Aura Finance (lead generation landing page)."
+      },
+      {
+        keywords: ['hpt', 'hptgroupuae', 'hptgroupuae.com'],
+        response: "We designed and launched HPT Group UAE (https://hptgroupuae.com), creating a clean, premium corporate portal matching their international business sectors."
+      },
+      {
+        keywords: ['hi', 'hello', 'hey', 'greetings', 'yo', 'sup'],
+        response: "Hello! I am Owais Assistant, the AI representative of Altrix. How can I help you explore our design services today?"
+      }
+    ];
+
+    let bestMatch = null;
+    let maxScore = 0;
+
+    qaDatabase.forEach(item => {
+      let score = 0;
+      // Score based on keyword hits
+      item.keywords.forEach(keyword => {
+        if (queryWords.includes(keyword) || q.includes(keyword)) {
+          score += 2; // Exact match weight
+        }
+      });
+
+      if (score > maxScore) {
+        maxScore = score;
+        bestMatch = item;
+      }
+    });
+
+    if (maxScore > 0 && bestMatch) {
+      return bestMatch.response;
     }
 
-    if (q.includes('services') || q.includes('design') || q.includes('develop') || q.includes('make') || q.includes('build') || q.includes('website')) {
-      return "Altrix Agency provides high-end:\n• UI/UX Brand Design & Prototypes\n• Interactive Next.js & Web Development\n• Custom E-Commerce Architectures\n• Animations & Visual Identity Overhauls";
-    }
-
-    if (q.includes('hello') || q.includes('hi') || q.includes('hey') || q.includes('yo') || q.includes('greetings')) {
-      return "Hello! How can I assist you with Altrix Agency today?";
-    }
-
-    return "Altrix Agency focuses on crafting high-end, smooth digital masterpieces for brands. You can reach out directly to team@altrixagency.in or call +91 8248858180 to speak to our founders Thanseer, Owais, and Harshad!";
+    return "I'd love to help you with that! As Owais Assistant, I can tell you that Altrix Agency specializes in building high-end, premium web interfaces. You can ask me about our founders, project rates, portfolio link hptgroupuae.com, or email team@altrixagency.in!";
   };
 
   // Generate reply via Gemini API or fallback
