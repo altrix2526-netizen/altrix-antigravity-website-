@@ -1202,17 +1202,22 @@ button { cursor: pointer; border: none; background: none; font-family: inherit; 
 .back-to-top:hover { box-shadow: 0 8px 25px rgba(13, 13, 12, 0.3); transform: translateY(-2px); }
 
 /* ================================================================
-   SCROLL REVEAL ANIMATIONS
+   SCROLL REVEAL ANIMATIONS (Liquid Deceleration)
    ================================================================ */
 .reveal {
   opacity: 0;
-  transform: translateY(30px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transform: translateY(40px);
+  transition: opacity 1.2s cubic-bezier(0.16, 1, 0.3, 1), transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+  will-change: transform, opacity;
 }
 .reveal.visible { opacity: 1; transform: translateY(0); }
 .reveal-delay-1 { transition-delay: 0.1s; }
 .reveal-delay-2 { transition-delay: 0.2s; }
 .reveal-delay-3 { transition-delay: 0.3s; }
+
+.service-card, .portfolio-card, .founder-card, .process-step {
+  will-change: transform;
+}
 
 /* ================================================================
    RESPONSIVE

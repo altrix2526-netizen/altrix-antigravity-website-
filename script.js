@@ -58,6 +58,7 @@ const startApp = () => {
   const cursorText = document.getElementById('cursorText');
   let cx = window.innerWidth / 2, cy = window.innerHeight / 2;
   let mouseX = cx, mouseY = cy;
+  let lastMouseX = cx, lastMouseY = cy;
   let cursorAnimationFrame = null;
 
   if (!isMobileOrTouch && customCursor) {
@@ -67,9 +68,19 @@ const startApp = () => {
     });
 
     const renderCursor = () => {
-      cx += (mouseX - cx) * 0.15;
-      cy += (mouseY - cy) * 0.15;
-      customCursor.style.transform = `translate3d(${cx}px, ${cy}px, 0)`;
+      cx += (mouseX - cx) * 0.14;
+      cy += (mouseY - cy) * 0.14;
+      
+      const dx = mouseX - lastMouseX;
+      const dy = mouseY - lastMouseY;
+      const speed = Math.sqrt(dx * dx + dy * dy);
+      
+      lastMouseX = mouseX;
+      lastMouseY = mouseY;
+      
+      const scaleVal = 1 + Math.min(speed * 0.002, 0.2);
+      
+      customCursor.style.transform = `translate3d(${cx}px, ${cy}px, 0) scale(${scaleVal})`;
       cursorAnimationFrame = requestAnimationFrame(renderCursor);
     };
     renderCursor();
