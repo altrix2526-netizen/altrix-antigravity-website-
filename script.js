@@ -346,7 +346,7 @@ const startApp = () => {
     const qaDatabase = [
       {
         keywords: ['founder', 'founders', 'founded', 'started', 'owners', 'owner', 'started', 'created', 'started altrix'],
-        response: "Altrix Agency was founded by Thanseer (COO), Owais (CTO), and Harshad (CRO). They combine design operations, engineering leadership, and business strategy to deliver high-performance websites."
+        response: "Altrix Agency was founded by Thanseer (COO), Owais (CTO), and Harshad (CRO). They combine design operations, engineering leadership, and relationship strategy to deliver high-performance websites."
       },
       {
         keywords: ['thanseer', 'coo', 'operations', 'operational', 'deliver'],
@@ -357,8 +357,8 @@ const startApp = () => {
         response: "Owais is the Chief Technology Officer (CTO) of Altrix. He leads all technical execution, site performance, interactive layouts, animations, and custom stack engineering."
       },
       {
-        keywords: ['harshad', 'cro', 'revenue', 'sales', 'growth', 'business', 'onboard'],
-        response: "Harshad is the Chief Revenue Officer (CRO) of Altrix. He manages revenue strategies, conversion funnels, client onboarding, and marketing pipeline optimization."
+        keywords: ['harshad', 'cro', 'relationship', 'client', 'partnerships', 'communication', 'onboard'],
+        response: "Harshad is the Chief Relationship Officer (CRO) of Altrix. He manages client partnerships, agency communication, and custom relationship channels."
       },
       {
         keywords: ['phone', 'mobile', 'call', 'number', 'whatsapp', 'dial', 'telephone', 'phone number', 'mobile number'],
