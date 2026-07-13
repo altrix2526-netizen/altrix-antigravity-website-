@@ -1,0 +1,617 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Altrix Agency — Brand &amp; Web Design Studio</title>
+  <meta name="description" content="Altrix Agency is a design and web experience studio building premium digital presences for established founder-led brands who refuse to be underestimated." />
+  <meta property="og:title" content="Altrix Agency — Brand &amp; Web Design Studio" />
+  <meta property="og:description" content="We build change-making digital presences for established creative brands." />
+  <meta property="og:type" content="website" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800;900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+  
+  <!-- GLOBAL ERROR BOUNDARY FOR QUICK VISUAL DEBUGGING -->
+  <script>
+    window.onerror = function(message, source, lineno, colno, error) {
+      const errBox = document.createElement('div');
+      errBox.style.position = 'fixed';
+      errBox.style.bottom = '20px';
+      errBox.style.left = '20px';
+      errBox.style.right = '20px';
+      errBox.style.background = '#fef2f2';
+      errBox.style.color = '#991b1b';
+      errBox.style.border = '1px solid #fee2e2';
+      errBox.style.borderRadius = '8px';
+      errBox.style.padding = '16px';
+      errBox.style.zIndex = '999999';
+      errBox.style.fontFamily = 'monospace';
+      errBox.style.fontSize = '12px';
+      errBox.style.whiteSpace = 'pre-wrap';
+      errBox.style.boxShadow = '0 10px 15px -3px rgba(0, 0, 0, 0.1)';
+      errBox.innerHTML = '<strong>Uncaught Script Error:</strong><br>' + message + '<br><br>Location: ' + source + ':' + lineno + ':' + colno;
+      document.body.appendChild(errBox);
+      return false;
+    };
+  </script>
+</head>
+<body>
+
+  <!-- FILM GRAIN OVERLAY SYSTEM -->
+  <div class="g_overlay">
+    <div class="g_grain_overlay u-grain-animate"></div>
+  </div>
+
+  <!-- CUSTOM BUBBLE CURSOR -->
+  <div class="cursor-wrap" id="customCursor">
+    <div class="cursor-dot"></div>
+    <div class="cursor-bubble">
+      <span class="cursor-bubble-text" id="cursorText">Details</span>
+    </div>
+  </div>
+
+  <!-- NAVIGATION -->
+  <header class="navbar" id="navbar">
+    <div class="nav-container">
+      <a href="#home" class="nav-logo" id="navLogo">
+        <span class="logo-icon">⬡</span>
+        <span class="logo-text">Altrix</span>
+      </a>
+      <nav class="nav-links" id="navLinks">
+        <a href="#services" class="nav-link" data-link-hover="">Services</a>
+        <a href="#work" class="nav-link" data-link-hover="">Work</a>
+        <a href="#founders" class="nav-link" data-link-hover="">Founders</a>
+        <a href="#process" class="nav-link" data-link-hover="">Process</a>
+        <a href="#about" class="nav-link" data-link-hover="">About</a>
+        <a href="#contact" class="nav-link" data-link-hover="">Contact</a>
+        <a href="tel:+918248858180" class="nav-phone-link u-text-mono">+91 8248858180</a>
+      </nav>
+      <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+        <span></span><span></span><span></span>
+      </button>
+    </div>
+  </header>
+
+  <!-- MOBILE MENU -->
+  <div class="mobile-menu" id="mobileMenu">
+    <a href="#services" class="mobile-link">Services</a>
+    <a href="#work" class="mobile-link">Work</a>
+    <a href="#founders" class="mobile-link">Founders</a>
+    <a href="#process" class="mobile-link">Process</a>
+    <a href="#about" class="mobile-link">About</a>
+    <a href="tel:+918248858180" class="mobile-link">Call: +91 8248858180</a>
+    <a href="#contact" class="mobile-cta-btn">Get Started &rarr;</a>
+  </div>
+
+  <!-- HERO SECTION -->
+  <section class="hero" id="home">
+    <!-- WebGL wave layer -->
+    <div class="floating-lines-wrap" id="heroFloatingLines"></div>
+    
+    <div class="hero-bg-image"></div>
+    <div class="hero-overlay"></div>
+    
+    <!-- Floating background decorative blobs -->
+    <div class="orb orb-1"></div>
+    <div class="orb orb-2"></div>
+    <div class="orb orb-3"></div>
+
+    <div class="hero-content">
+      <div class="hero-badge animate-badge">
+        <span class="badge-dot"></span>
+        <span class="u-text-mono">Altrix Agency · Crafting Premium Experiences</span>
+      </div>
+      <h1 class="hero-title animate-title">
+        Altrix Agency<br />
+        <span class="gradient-text">Crafting Digital Masterpieces</span>
+      </h1>
+      <p class="hero-subtitle animate-subtitle">
+        "A great website is not just a digital placeholder—it is your brand's most powerful asset. At Altrix, we close the gap between ambition and digital execution."
+      </p>
+      <div class="hero-buttons animate-buttons">
+        <a href="#work" class="btn-primary" id="heroViewWork" data-btn-default="">
+          <span class="btn-text">View Our Work</span>
+          <span class="btn-arrow-wrap">
+            <svg class="btn-arrow" viewBox="0 0 12 12" fill="none"><path d="M8.9 9.1L9 3L2.9 3.1L2.9 4.3L6.9 4.3L2.6 8.6L3.4 9.4L7.7 5.1L7.7 9.1L8.9 9.1Z" fill="currentColor"/></svg>
+            <svg class="btn-arrow is-absolute" viewBox="0 0 12 12" fill="none"><path d="M8.9 9.1L9 3L2.9 3.1L2.9 4.3L6.9 4.3L2.6 8.6L3.4 9.4L7.7 5.1L7.7 9.1L8.9 9.1Z" fill="currentColor"/></svg>
+          </span>
+        </a>
+      </div>
+      
+      <div class="hero-stats animate-stats">
+        <div class="stat-item">
+          <span class="stat-num" data-target="120">0</span><span class="stat-sym">+</span>
+          <span class="stat-label u-text-mono">Studio Projects</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="99">0</span><span class="stat-sym">%</span>
+          <span class="stat-label u-text-mono">Success Rate</span>
+        </div>
+        <div class="stat-divider"></div>
+        <div class="stat-item">
+          <span class="stat-num" data-target="4">0</span><span class="stat-sym">yrs</span>
+          <span class="stat-label u-text-mono">Of Growth</span>
+        </div>
+      </div>
+    </div>
+    <div class="hero-scroll-hint animate-scroll-hint">
+      <div class="scroll-line"></div>
+      <span class="u-text-mono">Scroll</span>
+    </div>
+  </section>
+
+  <!-- MARQUEE TICKER -->
+  <div class="marquee-strip">
+    <div class="marquee-track">
+      <span>Brand Strategy</span><span class="dot">◆</span>
+      <span>Visual Identity</span><span class="dot">◆</span>
+      <span>Website Strategy</span><span class="dot">◆</span>
+      <span>Web Design</span><span class="dot">◆</span>
+      <span>Webflow Development</span><span class="dot">◆</span>
+      <span>3D Experiences</span><span class="dot">◆</span>
+      <span>Brand Strategy</span><span class="dot">◆</span>
+      <span>Visual Identity</span><span class="dot">◆</span>
+      <span>Website Strategy</span><span class="dot">◆</span>
+      <span>Web Design</span><span class="dot">◆</span>
+      <span>Webflow Development</span><span class="dot">◆</span>
+      <span>3D Experiences</span><span class="dot">◆</span>
+    </div>
+  </div>
+
+  <!-- SERVICES SECTION -->
+  <section class="services-section" id="services">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag u-text-mono">Our Capabilities</div>
+        <h2 class="section-title">Services Built to <span class="gradient-text">Convert</span></h2>
+        <p class="section-subtitle">We design and construct digital assets that tell your story and drive business metrics.</p>
+      </div>
+
+      <div class="services-grid">
+        <div class="service-card" id="serviceWebDesign" data-cursor-text="Design">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="3"/><path d="M3 9h18M9 21V9"/></svg>
+          </div>
+          <h3>Brand &amp; Web Design</h3>
+          <p>Bespoke visual identity and interactive UI/UX designed to elevate value and capture attention.</p>
+          <ul class="service-features u-text-mono">
+            <li>Visual Identity Systems</li>
+            <li>Art Direction</li>
+            <li>Interactive Wireframes</li>
+          </ul>
+          <a href="#contact" class="service-link">View Details &rarr;</a>
+        </div>
+
+        <div class="service-card featured" id="serviceWebDev" data-cursor-text="Code">
+          <div class="featured-badge u-text-mono">Studio Core</div>
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+          </div>
+          <h3>Web Development</h3>
+          <p>Clean, high-speed component systems built for SEO index scores and fluid micro-transitions.</p>
+          <ul class="service-features u-text-mono">
+            <li>Three.js WebGL rendering</li>
+            <li>Sub-second Speed Scores</li>
+            <li>CMS Deployments</li>
+          </ul>
+          <a href="#contact" class="service-link">View Details &rarr;</a>
+        </div>
+
+        <div class="service-card" id="serviceEcom" data-cursor-text="Commerce">
+          <div class="service-icon">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M6 2L3 6v14a2 2 0 002 2h14a2 2 0 002-2V6l-3-4z"/><line x1="3" y1="6" x2="21" y2="6"/></svg>
+          </div>
+          <h3>E-Commerce Platforms</h3>
+          <p>Fast digital storefronts built to scale conversion rates, featuring custom cart flows and payment APIs.</p>
+          <ul class="service-features u-text-mono">
+            <li>Shopify custom setups</li>
+            <li>High-speed headless commerce</li>
+            <li>Conversion Audits</li>
+          </ul>
+          <a href="#contact" class="service-link">View Details &rarr;</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PORTFOLIO SECTION -->
+  <section class="work-section" id="work">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag class u-text-mono">Featured Cases</div>
+        <h2 class="section-title">Selected <span class="gradient-text">Releases</span></h2>
+        <p class="section-subtitle">We partner with founders to construct platforms that align with their scale.</p>
+      </div>
+
+      <div class="filter-tabs" role="tablist">
+        <button class="filter-btn active" data-filter="all" id="filterAll" role="tab">All Projects</button>
+        <button class="filter-btn" data-filter="web" id="filterWeb" role="tab">Brand Design</button>
+        <button class="filter-btn" data-filter="ecom" id="filterEcom" role="tab">E-Commerce</button>
+      </div>
+
+      <div class="portfolio-grid">
+        <div class="portfolio-card" data-category="web" id="portCard1" data-cursor-text="Visit Site">
+          <div class="portfolio-img" style="background: linear-gradient(135deg, hsl(30, 15%, 88%), hsl(240, 10%, 92%))">
+            <div class="port-mockup">
+              <div class="mockup-bar"><span></span><span></span><span></span></div>
+              <div class="mockup-content">
+                <div class="mockup-line w80"></div>
+                <div class="mockup-line w60"></div>
+                <div class="mockup-grid-2">
+                  <div class="mockup-block"></div>
+                  <div class="mockup-block"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="port-tag u-text-mono">Branding / Corporate Web</span>
+            <h3>HPT Group UAE</h3>
+            <p>High-end corporate platform built for HPT Group's UAE business sectors.</p>
+            <a href="https://hptgroupuae.com" target="_blank" rel="noopener noreferrer" class="port-link">Visit Website &rarr;</a>
+          </div>
+        </div>
+
+        <div class="portfolio-card" data-category="ecom" id="portCard2" data-cursor-text="Case Study">
+          <div class="portfolio-img" style="background: linear-gradient(135deg, hsl(340, 15%, 90%), hsl(25, 12%, 94%))">
+            <div class="port-mockup">
+              <div class="mockup-bar"><span></span><span></span><span></span></div>
+              <div class="mockup-content">
+                <div class="mockup-grid-3">
+                  <div class="mockup-product"></div>
+                  <div class="mockup-product"></div>
+                  <div class="mockup-product"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="portfolio-info">
+            <span class="port-tag u-text-mono">Shopify Engine</span>
+            <h3>Nordic Store</h3>
+            <p>Minimalist luxury storefront processing over $1.5M in annual sales.</p>
+            <a href="#contact" class="port-link">View Case &rarr;</a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOUNDERS SECTION -->
+  <section class="founders-section" id="founders">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag u-text-mono">Who We Are</div>
+        <h2 class="section-title">The Partners at <span class="gradient-text">Altrix</span></h2>
+        <p class="section-subtitle">We collaborate closely with founders to close the gap between ambition and representation.</p>
+      </div>
+
+      <div class="founders-grid">
+        <!-- Founder 1: Thanseer -->
+        <div class="founder-card" id="founderThanseer" data-cursor-text="COO">
+          <div class="founder-header">
+            <div class="founder-avatar avatar-thanseer">
+              <span>T</span>
+            </div>
+            <div class="founder-meta">
+              <h3>Thanseer</h3>
+              <span class="founder-position u-text-mono">Chief Operating Officer (COO)</span>
+            </div>
+          </div>
+          <div class="founder-quote">
+            <span class="quote-mark">&ldquo;</span>
+            <p>Operational execution at Altrix isn't just about meeting deadlines; it's about setting a benchmark. We design robust pipelines to align design and code perfectly, ensuring every agency delivery is seamless, scalable, and built exactly to client vision.</p>
+            <span class="quote-mark-end">&rdquo;</span>
+          </div>
+          <div class="founder-socials">
+            <a href="#" aria-label="LinkedIn Profile"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Founder 2: Owais -->
+        <div class="founder-card featured" id="founderOwais" data-cursor-text="CTO">
+          <div class="featured-indicator u-text-mono">Technical Lead</div>
+          <div class="founder-header">
+            <div class="founder-avatar avatar-owais">
+              <span>O</span>
+            </div>
+            <div class="founder-meta">
+              <h3>Owais</h3>
+              <span class="founder-position u-text-mono">Chief Technology Officer (CTO)</span>
+            </div>
+          </div>
+          <div class="founder-quote">
+            <span class="quote-mark">&ldquo;</span>
+            <p>Our architectural mandate is speed, stability, and pixel compliance. We completely strip technical debt, leveraging modern frameworks to deploy clean code, optimal SEO configurations, and smooth micro-interactions that operate flawlessly across platforms.</p>
+            <span class="quote-mark-end">&rdquo;</span>
+          </div>
+          <div class="founder-socials">
+            <a href="#" aria-label="LinkedIn Profile"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+          </div>
+        </div>
+
+        <!-- Founder 3: Harshad -->
+        <div class="founder-card" id="founderHarshad" data-cursor-text="CRO">
+          <div class="founder-header">
+            <div class="founder-avatar avatar-harshad">
+              <span>H</span>
+            </div>
+            <div class="founder-meta">
+              <h3>Harshad</h3>
+              <span class="founder-position u-text-mono">Chief Revenue Officer (CRO)</span>
+            </div>
+          </div>
+          <div class="founder-quote">
+            <span class="quote-mark">&ldquo;</span>
+            <p>A website should be a high-performance business asset, not just a static placeholder. Every design layout, CTA placement, and scroll dynamic is curated by our growth team to optimize user retention, scale conversions, and maximize product revenue.</p>
+            <span class="quote-mark-end">&rdquo;</span>
+          </div>
+          <div class="founder-socials">
+            <a href="#" aria-label="LinkedIn Profile"><svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M19 3a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h14m-.5 15.5v-5.3a3.26 3.26 0 0 0-3.26-3.26c-.85 0-1.84.52-2.32 1.3v-1.11h-2.79v8.37h2.79v-4.93c0-.77.62-1.4 1.39-1.4a1.4 1.4 0 0 1 1.4 1.4v4.93h2.79M6.88 8.56a1.68 1.68 0 0 0 1.68-1.68c0-.93-.75-1.69-1.68-1.69a1.69 1.69 0 0 0-1.69 1.69c0 .93.76 1.68 1.69 1.68m1.39 9.94v-8.37H5.5v8.37h2.77z"/></svg></a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- PROCESS SECTION -->
+  <section class="process-section" id="process">
+    <div class="container">
+      <div class="section-header">
+        <div class="section-tag u-text-mono">How We Work</div>
+        <h2 class="section-title">The Studio <span class="gradient-text">Method</span></h2>
+        <p class="section-subtitle">A transparent workflow from initial brand strategy maps to live deployment.</p>
+      </div>
+
+      <div class="process-steps">
+        <div class="process-step" id="step1">
+          <div class="step-number u-text-mono">01</div>
+          <div class="step-content">
+            <h3>Strategy &amp; Architecture</h3>
+            <p>We analyze product parameters and map out custom layout structures aligned to business targets.</p>
+          </div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="process-step" id="step2">
+          <div class="step-number u-text-mono">02</div>
+          <div class="step-content">
+            <h3>Visual Direction &amp; Prototype</h3>
+            <p>We curate visual mockups and layout systems for review before writing code.</p>
+          </div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="process-step" id="step3">
+          <div class="step-number u-text-mono">03</div>
+          <div class="step-content">
+            <h3>Component Build &amp; Code</h3>
+            <p>Clean, high-performance coding utilizing WebGL canvases and minimal assets for lightweight loads.</p>
+          </div>
+          <div class="step-connector"></div>
+        </div>
+        <div class="process-step" id="step4">
+          <div class="step-number u-text-mono">04</div>
+          <div class="step-content">
+            <h3>Launch &amp; Live Monitoring</h3>
+            <p>Complete launch tracking with ongoing monitoring of conversion paths and speed indexing.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ABOUT SECTION -->
+  <section class="about-section" id="about">
+    <div class="container about-grid">
+      <div class="about-visual">
+        <div class="about-card-stack">
+          <div class="about-card ac-1">
+            <div class="ac-icon">🎨</div>
+            <div>
+              <strong>Studio Taste</strong>
+              <span>Sandy Cream Aesthetic</span>
+            </div>
+          </div>
+          <div class="about-card ac-2">
+            <div class="ac-icon">⚡</div>
+            <div>
+              <strong>Clean Execution</strong>
+              <span>Optimal Page Performance</span>
+            </div>
+          </div>
+          <div class="about-card ac-3">
+            <div class="ac-icon">🔒</div>
+            <div>
+              <strong>Secure Blueprints</strong>
+              <span>Clean Coding Guidelines</span>
+            </div>
+          </div>
+          <div class="about-glow-circle"></div>
+        </div>
+      </div>
+
+      <div class="about-content">
+        <div class="section-tag u-text-mono">The Studio</div>
+        <h2 class="section-title">Built for Quality <span class="gradient-text">Over Speed</span></h2>
+        <p>Altrix is built on the principle of creative execution. We take on limited partnerships every year to dedicate maximum focus to each brand's success.</p>
+        <p>Every asset is designed, animated, and compiled with high-end typography and interactive shaders, creating websites that are both functional tools and art pieces.</p>
+        
+        <div class="about-highlights u-text-mono">
+          <div class="highlight">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Focused, small scale collaboration</span>
+          </div>
+          <div class="highlight">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Fully custom WebGL backgrounds</span>
+          </div>
+          <div class="highlight">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Dedicated long-term support pipelines</span>
+          </div>
+        </div>
+
+        <a href="#contact" class="btn-primary" id="aboutCta" data-btn-default="">
+          <span class="btn-text">Inquire &amp; Partner</span>
+          <span class="btn-arrow-wrap">
+            <svg class="btn-arrow" viewBox="0 0 12 12" fill="none"><path d="M8.9 9.1L9 3L2.9 3.1L2.9 4.3L6.9 4.3L2.6 8.6L3.4 9.4L7.7 5.1L7.7 9.1L8.9 9.1Z" fill="currentColor"/></svg>
+            <svg class="btn-arrow is-absolute" viewBox="0 0 12 12" fill="none"><path d="M8.9 9.1L9 3L2.9 3.1L2.9 4.3L6.9 4.3L2.6 8.6L3.4 9.4L7.7 5.1L7.7 9.1L8.9 9.1Z" fill="currentColor"/></svg>
+          </span>
+        </a>
+      </div>
+    </div>
+  </section>
+
+  <!-- CONTACT SECTION -->
+  <section class="contact-section" id="contact">
+    <div class="container">
+      <div class="contact-grid">
+        <div class="contact-info">
+          <div class="section-tag u-text-mono">Let's Connect</div>
+          <h2 class="section-title">Let's Build <span class="gradient-text">Something Great</span></h2>
+          <p>Contact the studio using the form. If you're a match, we'll coordinate a project intro call within 24 hours.</p>
+          
+          <div class="contact-details">
+            <div class="contact-detail">
+              <div class="contact-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+              </div>
+              <div>
+                <strong>Email Address</strong>
+                <span>team@altrixagency.in</span>
+              </div>
+            </div>
+            
+            <div class="contact-detail">
+              <div class="contact-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013 7.82a2 2 0 011.27-1.82 2 2 0 01.73-.13h3a2 2 0 012 1.72c.13 1 .36 1.99.71 2.94a2 2 0 01-.45 2.11L9.09 13a16 16 0 006.29 6.29l1.27-1.27a2 2 0 012.11-.45c.95.35 1.94.58 2.94.71a2 2 0 011.72 1.64z"/></svg>
+              </div>
+              <div>
+                <strong>Inquiry Hotline</strong>
+                <span><a href="tel:+918248858180">+91 8248858180</a></span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <form class="contact-form" id="contactForm" action="https://formsubmit.co/team@altrixagency.in" method="POST">
+          <!-- FormSubmit Configuration Fields -->
+          <input type="hidden" name="_subject" value="New Inquiry from Altrix Agency Website!">
+          <input type="hidden" name="_honey" style="display:none">
+          
+          <div class="form-row">
+            <div class="form-group">
+              <label for="firstName">First Name</label>
+              <input type="text" id="firstName" name="firstName" placeholder="Thanseer" required />
+            </div>
+            <div class="form-group">
+              <label for="lastName">Last Name</label>
+              <input type="text" id="lastName" name="lastName" placeholder="Khan" required />
+            </div>
+          </div>
+          <div class="form-group">
+            <label for="email">Email Address</label>
+            <input type="email" id="email" name="email" placeholder="client@company.com" required />
+          </div>
+          <div class="form-group">
+            <label for="budget">Project Budget (INR)</label>
+            <select id="budget" name="budget">
+              <option value="">Choose a budget range...</option>
+              <option value="growth">₹2,000 – ₹5,000</option>
+              <option value="pro">₹5,000 – ₹10,000</option>
+              <option value="enterprise">₹20,000+</option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="message">Project Description</label>
+            <textarea id="message" name="message" rows="4" placeholder="Briefly outline your goals and design preferences..."></textarea>
+          </div>
+          <button type="submit" class="btn-primary form-submit" id="formSubmitBtn" data-btn-default="">
+            <span class="btn-text">Send Details</span>
+            <span class="btn-arrow-wrap">
+              <svg class="btn-arrow" viewBox="0 0 12 12" fill="none"><path d="M8.9 9.1L9 3L2.9 3.1L2.9 4.3L6.9 4.3L2.6 8.6L3.4 9.4L7.7 5.1L7.7 9.1L8.9 9.1Z" fill="currentColor"/></svg>
+              <svg class="btn-arrow is-absolute" viewBox="0 0 12 12" fill="none"><path d="M8.9 9.1L9 3L2.9 3.1L2.9 4.3L6.9 4.3L2.6 8.6L3.4 9.4L7.7 5.1L7.7 9.1L8.9 9.1Z" fill="currentColor"/></svg>
+            </span>
+          </button>
+          
+          <div class="form-success" id="formSuccess">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><polyline points="20 6 9 17 4 12"/></svg>
+            <span>Message sent successfully! Our executive team will reach out shortly.</span>
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="footer">
+    <div class="container footer-grid">
+      <div class="footer-brand">
+        <a href="#home" class="nav-logo">
+          <span class="logo-icon">⬡</span>
+          <span class="logo-text">Altrix</span>
+        </a>
+        <p>Premium web design and engineering studio. We build custom websites, dashboards, and storefronts for growth-minded brands.</p>
+        
+        <div class="social-links">
+          <a href="#" class="social-btn" id="socialTwitter" aria-label="Twitter">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M23 3a10.9 10.9 0 01-3.14 1.53 4.48 4.48 0 00-7.86 3v1A10.66 10.66 0 013 4s-4 9 5 13a11.64 11.64 0 01-7 2c9 5 20 0 20-11.5a4.5 4.5 0 00-.08-.83A7.72 7.72 0 0023 3z"/></svg>
+          </a>
+          <a href="#" class="social-btn" id="socialLinkedIn" aria-label="LinkedIn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 016 6v7h-4v-7a2 2 0 00-2-2 2 2 0 00-2 2v7h-4v-7a6 6 0 016-6zM2 9h4v12H2z"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h4>Core Offerings</h4>
+        <ul>
+          <li><a href="#services">UI/UX Layouts</a></li>
+          <li><a href="#services">Next.js Development</a></li>
+          <li><a href="#services">E-Commerce Design</a></li>
+          <li><a href="#services">Brand Visual Identity</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Founders</h4>
+        <ul>
+          <li><a href="#founders">Thanseer (COO)</a></li>
+          <li><a href="#founders">Owais (CTO)</a></li>
+          <li><a href="#founders">Harshad (CRO)</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Connect</h4>
+        <ul>
+          <li><a href="mailto:team@altrixagency.in">team@altrixagency.in</a></li>
+          <li><a href="tel:+918248858180">+91 8248858180</a></li>
+          <li><a href="#contact">Schedule Consultation</a></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span class="u-text-mono">&copy; 2026 Altrix Agency. All rights reserved.</span>
+        <div class="footer-legal u-text-mono">
+          <a href="#">Privacy Policy</a>
+          <a href="#">Terms of Service</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll-to-top button -->
+  <button class="back-to-top" id="backToTop" aria-label="Back to top">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M18 15l-6-6-6 6"/></svg>
+  </button>
+
+  <!-- External dependencies and site scripts -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
+  <script src="floating-lines.js"></script>
+  <script src="script.js"></script>
+</body>
+</html>
